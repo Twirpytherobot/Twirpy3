@@ -1,0 +1,65 @@
+
+#define enB 9
+#define in3 6
+#define in4 7
+
+
+int incomingByte = 0; 
+int rotDirection = 0;
+
+
+
+void setup() {
+
+
+
+Serial.begin(9600);
+pinMode(enB, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+
+  // Set initial rotation direction
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+}
+
+void loop() {
+  int pwmOutput = 255;
+  analogWrite(enB, pwmOutput);
+
+  
+        if (Serial.available() > 0) {
+                incomingByte = Serial.read();
+                Serial.print("I received: ");
+                Serial.println(incomingByte, DEC);
+                
+  
+                 if (incomingByte == 119){
+                   digitalWrite(in3, HIGH);
+                   digitalWrite(in4, LOW);
+                   rotDirection = 1;
+                   delay(20);
+                  }
+                 else if (incomingByte == 115){
+                  digitalWrite(in3, LOW);
+                  digitalWrite(in4, HIGH);
+                  rotDirection = 0;
+                  delay(20);
+
+                    }
+                    //else if (incomingByte == 97){
+                       // R.write(180);
+                       // L.write(180);   
+                    // }
+                    //  else if (incomingByte == 100){
+                      //    R.write(0);
+                      //    L.write(0);
+                     // }
+                     // else if (incomingByte == 32){
+                     //   R.write(88);
+                     //   L.write(88);
+                        }
+                      }
+                    
+
+
